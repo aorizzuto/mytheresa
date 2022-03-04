@@ -15,11 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
-	maven { url = uri("https://repo.spring.io/milestone") }
-	maven { url = uri("https://repo.spring.io/snapshot") }
 }
-
-extra["springCloudVersion"] = "2021.0.2-SNAPSHOT"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -32,6 +28,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
