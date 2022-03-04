@@ -1,0 +1,12 @@
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl_auto: none
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#
+#  datasource:
+#    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3307}/mytheresa?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+#    username: ${MYSQL_USER:root} # This could be credentials from AWS RDS
+#    password: ${MYSQL_PASS:root} # This could be credentials from AWS RDS
+#    platform: mysql
+#    initialization-mode: always
