@@ -7,7 +7,7 @@ import com.mytheresa.challenge.repository.model.Product
 import org.springframework.core.io.ClassPathResource
 import java.nio.file.Files
 
-class JsonUtils(private val path: String) {
+class JsonUtils(private val path: String = "") {
     private val mapper = jacksonObjectMapper()
     private var json: JsonNode? = null
 
@@ -23,4 +23,6 @@ class JsonUtils(private val path: String) {
     }
 
     fun getListOfProducts(): List<Product> = loadFile().toListOfProducts()
+
+    fun <T> getObjectAsString(obj: T): String = mapper.writeValueAsString(obj)
 }
