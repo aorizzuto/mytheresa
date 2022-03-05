@@ -5,6 +5,8 @@ import com.mytheresa.challenge.converter.ProductConverter
 import com.mytheresa.challenge.dto.ProductDTO
 import com.mytheresa.challenge.dto.ProductResponseDTO
 import com.mytheresa.challenge.enums.CategoryEnum
+import com.mytheresa.challenge.exceptions.BadRequestException
+import com.mytheresa.challenge.exceptions.ErrorCode
 import com.mytheresa.challenge.repository.IProductRepository
 import com.mytheresa.challenge.repository.model.Product
 import com.mytheresa.challenge.service.IService
@@ -30,7 +32,7 @@ class ProductServiceImpl(
 
         priceLessThan?.let{
             log("Validation Failed")
-            if (priceLessThan <= BigDecimal.ZERO) throw Exception()
+            if (priceLessThan <= BigDecimal.ZERO) throw BadRequestException(ErrorCode.PRICE_NEGATIVE)
         }
 
         log("Validation Success")

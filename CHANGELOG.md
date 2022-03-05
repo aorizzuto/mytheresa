@@ -10,6 +10,13 @@ Dates in this file will have the following format: MM/DD/YYYY
 2) I will work with branching methodology. Each branch will be one feature (one ticket in JIRA)
 3) When one feature is finished, with its tests, branch will be merged with "main" branch as you can see in [github](https://github.com/aorizzuto/mytheresa)
 
+## [0.3.0] - 03/05/2022 - feature/exception-handling
+- GlobalExceptionHandler created to handle response in controller
+- See "ExceptionBadRequest.png" image to see Exception when category field is missing
+- See "ExceptionLowerThanZero.png" image to see Exception when discount is lower than zero
+- ErrorCode enum was created to encapsulate all error codes in one place
+- ResponseEntityBody is the DTO in response
+
 ## [0.2.0] - 03/05/2022 - Branch: feature/products-endpoint
 ### Added
 - GET /products endpoint created
