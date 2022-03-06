@@ -128,6 +128,9 @@ represents the applied discount with the % sign.
 ## HOW TO RUN THE PROJECT
 Here are two ways to run this project, with or withour Docker:
 
+### NOTE
+Keep in mind that it will take some time the first time we run the commands since Docker needs to build and create the image. Following times will be run instantaneously.
+
 ### With DOCKER
 
 1) Clone [repository](git@github.com:aorizzuto/mytheresa.git) to path "pathOrigin" where you want to clone the repository and make the clone, then choose a name for the repository
@@ -147,6 +150,10 @@ docker run -p 8080:8080 -it $(docker build -q .)
 ### Without DOCKER
 1) Execute first three steps mentioned above
 2) Run following command:
+```
+./gradlew clean build
+```
+3) Run following command:
 ```
 java -jar -Dspring.profiles.active=local build/libs/challenge-0.0.1-SNAPSHOT.jar 
 ```
