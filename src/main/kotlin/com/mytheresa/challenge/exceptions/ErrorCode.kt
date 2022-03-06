@@ -1,7 +1,6 @@
 package com.mytheresa.challenge.exceptions
 
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatus.*
 
 enum class ErrorCode (val msg: String, val errorCode: HttpStatus) {
 

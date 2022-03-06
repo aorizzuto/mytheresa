@@ -1,6 +1,5 @@
 package com.mytheresa.challenge.service.impl
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.mytheresa.challenge.converter.ProductConverter
 import com.mytheresa.challenge.dto.ProductDTO
 import com.mytheresa.challenge.dto.ProductResponseDTO
@@ -21,18 +20,18 @@ import java.math.BigDecimal
 @Service
 class ProductServiceImpl(
     val productRepository: IProductRepository,
-    val discountService: DiscountService,
+    val discountService: DiscountServiceImpl,
     @Value("\${response.max-records:}") val maxRecords: Int
 ): IService, LoggerUtils("[PRODUCT-SERVICE]") {
 
-    private val objectMapper = ObjectMapper()
-
     override fun validate(category: String, priceLessThan: BigDecimal?){
-        log("Start request validation")
+        log("Start request validation with category: $category and priceLessThan: $priceLessThan")
 
         priceLessThan?.let{
-            log("Validation Failed")
-            if (priceLessThan <= BigDecimal.ZERO) throw BadRequestException(ErrorCode.PRICE_NEGATIVE)
+            if (priceLessThan <= BigDecimal.ZERO) {
+                log("Validation Failed")
+                throw BadRequestException(ErrorCode.PRICE_NEGATIVE)
+            }
         }
 
         log("Validation Success")
@@ -41,20 +40,21 @@ class ProductServiceImpl(
     override fun process(category: String, priceLessThan: BigDecimal?): List<ProductResponseDTO> {
         log("Start process")
 
-        var products = getProducts(category, priceLessThan)
+        val products = getProducts(category, priceLessThan)
 
-        products = applyDiscounts(products)
+        log("Products returned from database are: ${JsonUtils().getObjectAsString(products)}")
 
-        log("Products returned are: ${JsonUtils().getObjectAsString(products)}")
+        if (products.isNotEmpty()) {
+            applyDiscounts(products)
+            log("Products after discounts returned are: ${JsonUtils().getObjectAsString(products)}")
+        }
 
         return ProductConverter.toResponse(products)
     }
 
-    private fun applyDiscounts(products: List<ProductDTO>): List<ProductDTO> {
+    private fun applyDiscounts(products: List<ProductDTO>) {
         discountService.applySKU3discount(products)
         discountService.applyCategoryDiscount(products, CategoryEnum.BOOTS)
-
-        return products
     }
 
     private fun getProducts(category: String, priceLessThan: BigDecimal?): List<ProductDTO> {

@@ -10,7 +10,25 @@ Dates in this file will have the following format: MM/DD/YYYY
 2) I will work with branching methodology. Each branch will be one feature (one ticket in JIRA)
 3) When one feature is finished, with its tests, branch will be merged with "main" branch as you can see in [github](https://github.com/aorizzuto/mytheresa)
 
+## [0.4.0] - 03/06/2022 - feature/product-endpoint-tests
+### Added
+- Tests over validations
+- Tests over productService
+- Using Mockito annotations @Mock, @Spy, @Captor
+- Using ArgumentMatcher for mocks
+- Using @Test and @ParameterizedTest annotations
+- MockitoUtils created to get anyObject() NOT NULL and perform some tests than accept not null parameters
+- Mockito.times used to check invocations to a mock
+- Tests over discountService
+- Controller tests. Endpoint /products tests
+- Coverage with tests of 95%. See "coverage.png" image
+
+### Modified
+- Added products.isNotEmpty() validation after database to skip discounts in case we does not have any product that matches request
+- Added discount column in CategoryEnum to know if the category has a "category discount". This way the "30% discount" hardcoded is removed from discountService
+
 ## [0.3.0] - 03/05/2022 - feature/exception-handling
+### Added
 - GlobalExceptionHandler created to handle response in controller
 - See "ExceptionBadRequest.png" image to see Exception when category field is missing
 - See "ExceptionLowerThanZero.png" image to see Exception when discount is lower than zero
