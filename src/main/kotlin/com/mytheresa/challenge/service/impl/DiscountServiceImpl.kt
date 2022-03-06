@@ -8,24 +8,24 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-class DiscountService: LoggerUtils("[DISCOUNT-SERVICE]"), IDiscountService {
+class DiscountServiceImpl: LoggerUtils("[DISCOUNT-SERVICE]"), IDiscountService {
 
     override fun applyCategoryDiscount(products: List<ProductDTO>, category: CategoryEnum) {
         log("Applying discount for category")
-        applyDiscount(products, 30) {product -> product.category.equals(category.value, ignoreCase = true)}
+        applyDiscount(products, category.categoryDiscount) {product -> product.category.equals(category.value, ignoreCase = true)}
     }
 
     override fun applySKU3discount(products: List<ProductDTO>) {
         log("Applying SKU=3 discount")
-        applyDiscount(products, 15) {product -> product.sku == "000003"}
+        applyDiscount(products, BigDecimal(15)) {product -> product.sku == "000003"}
     }
 
-    private fun applyDiscount(products: List<ProductDTO>, discountToApply: Int, predicate: (ProductDTO) -> (Boolean)) {
+    private fun applyDiscount(products: List<ProductDTO>, discountToApply: BigDecimal, predicate: (ProductDTO) -> (Boolean)) {
         products.filter { predicate(it) }
             .forEach { product ->
                 with(product) {
                     log("Applying discount to sku: $sku with name: $name and category: $category")
-                    discount = BigDecimal(discountToApply)
+                    discount = discountToApply
                 }
             }
     }
