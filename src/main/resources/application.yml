@@ -3,9 +3,10 @@ server:
   servlet:
     context-path: /
 
-spring:
-  profiles:
-    active: local
+# This was used for debug but this configuration needs to be an argument when project is called
+#spring:
+#  profiles:
+#    active: local
 
 # Max records returned by database to send in response
 response:

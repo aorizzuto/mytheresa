@@ -10,11 +10,22 @@ Dates in this file will have the following format: MM/DD/YYYY
 2) I will work with branching methodology. Each branch will be one feature (one ticket in JIRA)
 3) When one feature is finished, with its tests, branch will be merged with "main" branch as you can see in [github](https://github.com/aorizzuto/mytheresa)
 
+### NOTE:
+- We could use Project Reactor to this project but this depends on how many requests by second in this API I'll have.
+- Using Project Reactor allows parallel thread execution. We need to use Mono/Flex and subscribe Monos to perform the cycle.
+
 ## [0.5.0] - 03/06/2022 - feature/adding-logs
 ### Added
 - More logs
 - File "mytheresa.postman_collection.json" with all the request used for this challenge
 - Local environment for H2 usage. Leaving DEV environment for another dbms.
+- EnvironmentUtils to handle environments active
+- Dockerfile to run this project
+- Instructions to run this project on README.md
+
+### Modified
+- How to read file from resources was modified due to errors when running project from command line
+- Removed init H2 setup from ChallengeApplication.kt and moving it to InitConfig file. Adding environment check before work with H2
 
 ## [0.4.0] - 03/06/2022 - feature/product-endpoint-tests
 ### Added

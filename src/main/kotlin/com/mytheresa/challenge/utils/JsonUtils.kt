@@ -12,7 +12,8 @@ class JsonUtils(private val path: String = "") {
     private var json: JsonNode? = null
 
     private fun loadFile() = apply {
-        val file = Files.readString(ClassPathResource(path).file.toPath())
+//        val file = Files.readString(ClassPathResource(path).file.toPath())
+        val file = javaClass.classLoader.getResourceAsStream(path)
         json = mapper.readTree(file)
     }
 

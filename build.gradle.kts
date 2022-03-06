@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
 	id("org.springframework.boot") version "2.6.2"
@@ -7,6 +9,7 @@ plugins {
 	kotlin("plugin.spring") version "1.6.10"
 	id("org.jetbrains.kotlin.plugin.noarg") version "1.4.30"
 	id("org.jetbrains.kotlin.plugin.allopen") version "1.4.30"
+	id("com.adarshr.test-logger") version "3.2.0"
 }
 
 group = "com.mytheresa"
