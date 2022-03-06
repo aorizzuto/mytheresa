@@ -10,6 +10,12 @@ Dates in this file will have the following format: MM/DD/YYYY
 2) I will work with branching methodology. Each branch will be one feature (one ticket in JIRA)
 3) When one feature is finished, with its tests, branch will be merged with "main" branch as you can see in [github](https://github.com/aorizzuto/mytheresa)
 
+## [0.5.0] - 03/06/2022 - feature/adding-logs
+### Added
+- More logs
+- File "mytheresa.postman_collection.json" with all the request used for this challenge
+- Local environment for H2 usage. Leaving DEV environment for another dbms.
+
 ## [0.4.0] - 03/06/2022 - feature/product-endpoint-tests
 ### Added
 - Tests over validations
@@ -59,7 +65,7 @@ Dates in this file will have the following format: MM/DD/YYYY
 ## [0.1.0] - 03/05/2022 - Branch: feature/create-package-structure
 
 ### Added
-- H2 database usage (We can set another dbms in app.properties for another environment. I used H2 for dev environment)
+- H2 database usage in local properties (We can set another dbms in app.properties for another environment. I used H2 for local environment)
 - Package structure
 - Save initial products to database with @EventListener (Another way is to create the "Insert queries" in data.sql. There are many ways to do this. I choose PostConstruct just to show how to convert json to model, and then use this model to save it to database )
 - "Product" entity. (In here we can use @Column(name = ...) in case we want to name the column different than the table in database)
