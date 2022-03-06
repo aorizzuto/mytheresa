@@ -60,6 +60,7 @@ class ProductServiceImpl(
     private fun getProducts(category: String, priceLessThan: BigDecimal?): List<ProductDTO> {
         log("Getting products from database")
         val products = getProductsFromDatabase(category, priceLessThan)
+        log("There was returned ${products.size} products")
         return ProductConverter.toProductDTO(products)
     }
 
