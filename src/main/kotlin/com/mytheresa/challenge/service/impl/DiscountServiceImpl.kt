@@ -10,6 +10,10 @@ import java.math.BigDecimal
 @Service
 class DiscountServiceImpl: LoggerUtils("[DISCOUNT-SERVICE]"), IDiscountService {
 
+    override fun checkDiscounts(products:List<ProductDTO>) {
+        applySKU3discount(products)
+        applyCategoryDiscount(products, CategoryEnum.BOOTS)
+    }
     override fun applyCategoryDiscount(products: List<ProductDTO>, category: CategoryEnum) {
         log("Applying discount for category")
         applyDiscount(products, category.categoryDiscount) {product -> product.category.equals(category.value, ignoreCase = true)}
@@ -25,7 +29,7 @@ class DiscountServiceImpl: LoggerUtils("[DISCOUNT-SERVICE]"), IDiscountService {
             .forEach { product ->
                 with(product) {
                     log("Applying discount to sku: $sku with name: $name and category: $category")
-                    discount = discountToApply
+                    discounts.add(discountToApply)
                 }
             }
     }

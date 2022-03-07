@@ -5,6 +5,8 @@ import com.mytheresa.challenge.enums.CategoryEnum
 
 interface IDiscountService {
 
+    fun checkDiscounts(products:List<ProductDTO>)
+
     fun applyCategoryDiscount(products: List<ProductDTO>, category: CategoryEnum)
 
     fun applySKU3discount(products: List<ProductDTO>)

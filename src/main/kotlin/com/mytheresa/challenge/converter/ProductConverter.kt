@@ -17,8 +17,8 @@ object ProductConverter {
                     category = category,
                     price = PriceDTO(
                         original = price.toInt(),
-                        final = discount?.let { getPriceWithDiscount(price, it) } ?: price.toInt(),
-                        discountPercentage = product.discount?.let { product.discount.toString() + "%"},
+                        final = if(discounts.isNotEmpty()){ getPriceWithDiscount(price, discounts) } else {price.toInt()},
+                        discountPercentage = discounts.maxOrNull()?.let { "$it%" },
                     )
                 )
             }
@@ -36,7 +36,8 @@ object ProductConverter {
             }
         }
 
-    private fun getPriceWithDiscount(price: BigDecimal, discount: BigDecimal): Int {
-        return price.multiply(BigDecimal(1).minus(discount.divide(BigDecimal(100)))).toInt()
+    private fun getPriceWithDiscount(price: BigDecimal, discount: MutableList<BigDecimal>): Int {
+        val maxDiscount = discount.maxOrNull()
+        return price.multiply(BigDecimal(1).minus(maxDiscount!!.divide(BigDecimal(100)))).toInt()
     }
 }

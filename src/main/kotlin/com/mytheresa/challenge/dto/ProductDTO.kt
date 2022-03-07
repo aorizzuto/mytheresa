@@ -7,5 +7,5 @@ class ProductDTO (
     val name: String,
     val category: String,
     val price: BigDecimal,
-    var discount: BigDecimal? = null
+    var discounts: MutableList<BigDecimal> = mutableListOf()
 )

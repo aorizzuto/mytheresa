@@ -24,7 +24,7 @@ class DiscountServiceTest {
 
         assertDoesNotThrow { discountService.applySKU3discount(products) }
 
-        assert(products.first { product -> product.sku.toInt() == 3 }.discount != null)
+        assert(products.first { product -> product.sku.toInt() == 3 }.discounts.maxOrNull() != null)
     }
 
     @Test
@@ -33,7 +33,7 @@ class DiscountServiceTest {
 
         assertDoesNotThrow { discountService.applySKU3discount(products) }
 
-        assert(products.all { product -> product.discount == null })
+        assert(products.all { product -> product.discounts.isEmpty() })
     }
 
     @Test
@@ -42,7 +42,7 @@ class DiscountServiceTest {
         val category = CategoryEnum.BOOTS
 
         assertDoesNotThrow { discountService.applyCategoryDiscount(products, category) }
-        assert(products.all { product -> product.discount != null && product.discount == category.categoryDiscount })
+        assert(products.all { product -> product.discounts.maxOrNull() != null && product.discounts.maxOrNull() == category.categoryDiscount })
     }
 
     @Test
@@ -51,7 +51,7 @@ class DiscountServiceTest {
         val category = CategoryEnum.BOOTS
 
         assertDoesNotThrow { discountService.applyCategoryDiscount(products, category) }
-        assert(products.all { product -> product.discount == null })
+        assert(products.all { product -> product.discounts.isEmpty() })
     }
 
     @Test
@@ -61,7 +61,7 @@ class DiscountServiceTest {
 
         assertDoesNotThrow { discountService.applySKU3discount(products) }
         assertDoesNotThrow { discountService.applyCategoryDiscount(products, category) }
-        assert(products.all { product -> product.discount == null })
+        assert(products.all { product -> product.discounts.isEmpty()})
         assert(products.all { product -> product.sku.toInt() != 3})
     }
 
@@ -72,7 +72,7 @@ class DiscountServiceTest {
 
         assertDoesNotThrow { discountService.applySKU3discount(products) }
         assertDoesNotThrow { discountService.applyCategoryDiscount(products, category) }
-        assert(products.first { product -> product.sku.toInt() == 3 }.discount == CategoryEnum.BOOTS.categoryDiscount)
+        assert(products.first { product -> product.sku.toInt() == 3 }.discounts.maxOrNull() == CategoryEnum.BOOTS.categoryDiscount)
     }
 
     private fun getProducts(categoryFilter: String): List<ProductDTO> {

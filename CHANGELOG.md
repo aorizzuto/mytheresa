@@ -14,6 +14,10 @@ Dates in this file will have the following format: MM/DD/YYYY
 - We could use Project Reactor to this project but this depends on how many requests by second in this API I'll have.
 - Using Project Reactor allows parallel thread execution. We need to use Mono/Flex and subscribe Monos to perform the cycle.
 
+## [0.6.0] - 03/07/2022 - feature/fix-discounts
+### Modified
+- New way to apply discounts. More effective. Before discounts were written from lowest to higher. Now I'm using a list saving all the discounts applied to the product. After that, I use "maxOrNull()" method to get higher discount.
+
 ## [0.5.0] - 03/06/2022 - feature/adding-logs
 ### Added
 - More logs
