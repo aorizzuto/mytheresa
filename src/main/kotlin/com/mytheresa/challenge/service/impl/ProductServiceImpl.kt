@@ -53,8 +53,7 @@ class ProductServiceImpl(
     }
 
     private fun applyDiscounts(products: List<ProductDTO>) {
-        discountService.applySKU3discount(products)
-        discountService.applyCategoryDiscount(products, CategoryEnum.BOOTS)
+        discountService.checkDiscounts(products)
     }
 
     private fun getProducts(category: String, priceLessThan: BigDecimal?): List<ProductDTO> {
